@@ -1,0 +1,31 @@
+---
+title: "HS:Bethlehem Catholic Class 26 Height:6’2  Weight: 303 Position: OL"
+description: "This is a demo of adding content to the homepage."
+---
+Welcome to Henry Russell.com! :sunglasses: :football:
+
+{{< figure
+    src="/img/henry.png"
+    alt="Henry Russell"
+    caption="HS:Bethlehem Catholic Class 26 Height:6’2  Weight: 303 Position: OL"
+    >}}
+
+
+{{ with resources.Get "https://example.com/feed/" | transform.Unmarshal }}
+     {{ range .channel.item }}
+        <div style="display: inline-block;">
+            {{ $desc := (.description | transform.Unmarshal) }}
+            {{ with resources.Get (index $desc.img "-src") }}
+            {{ $img := .Fill "200x200 smart" }}
+            <img src="{{ $img.Permalink }}" style="float: left; margin-right: 10px;"/>
+            {{ end }}
+            <div>
+                <strong>{{ .title | plainify | htmlUnescape }}</strong><br />
+                <p>{{ .description | plainify | htmlUnescape }}</p>
+                {{ $link := .link | plainify | htmlUnescape }}
+                <a href="{{ $link }}">{{ $link }}</a><br />
+            </div>
+        </div>
+        <hr />
+     {{ end }}
+ {{ end }}
